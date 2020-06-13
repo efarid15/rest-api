@@ -10,10 +10,12 @@ type Response struct {
 	Message string `json:"message"`
 }
 
+// respond json error
 func RespondWithError(w http.ResponseWriter, code int, message string) {
 	RespondWithJSON(w, code, map[string]string{"error": message})
 }
 
+// respond json success
 func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	mapdata := map[string]interface{}{}
 	mapdata["status"] = http.StatusOK
