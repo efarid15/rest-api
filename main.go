@@ -2,12 +2,13 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	customer "goproject/controller"
 	"log"
 	"net/http"
 )
-import  "goproject/controller"
 
 func main() {
+
 	router := mux.NewRouter()
 
 	// routing endpoint to customer controller function

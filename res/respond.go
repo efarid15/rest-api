@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type Response struct {
-	Status int `json:"status"`
-	Message string `json:"message"`
-}
 
 // respond json error
 func RespondWithError(w http.ResponseWriter, code int, message string) {

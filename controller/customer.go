@@ -1,23 +1,42 @@
 package customer
 
 import (
+	"errors"
+	respond "goproject/res"
 	"net/http"
+	"os"
+	"plugin"
 )
-import "goproject/model"
-import "goproject/res"
 
 // get customer function
 func GetCustomer(w http.ResponseWriter, r *http.Request) {
 
-	// access customer model
-	datacustomer := customermodel.InsertCustomer()
+	plug, err := plugin.Open("lib/customer.so")
+	if err != nil {
+		println(err)
+		os.Exit(1)
+	}
+
+	symCustomer, err := plug.Lookup("GetData")
+	if err != nil {
+		println("Salah simbol")
+		os.Exit(1)
+	}
+
+	//fmt.Printf("%T\n", symCustomer)
+	pgPtr, ok := symCustomer.(func() interface{})
+	if !ok {
+		panic(errors.New("gagal binding ke plugin interface"))
+	}
+
+	var datacustomer interface{}
+	datacustomer = pgPtr()
 
 	if datacustomer == nil {
-		// respond if error
 		respond.RespondWithError(w, http.StatusInternalServerError, "Internal Server Error")
 	}
 
-	// respond if success endpoint
+
 	respond.RespondWithJSON(w, http.StatusOK, datacustomer)
 
 }
