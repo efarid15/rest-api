@@ -8,9 +8,7 @@ import (
 
 // get customer function
 func GetCustomer(w http.ResponseWriter, r *http.Request) {
-
 	var dataCustomer, data interface{}
-
 	dataCustomer = pluginaccess.PluginAccess("lib/customer.so", "GetData", data)
 
 	if dataCustomer == nil {

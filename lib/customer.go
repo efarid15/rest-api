@@ -19,5 +19,6 @@ func InsertCustomer() (customers []CustomerModel)  {
 	customers = append(customers, CustomerModel{FirstName: "John", LastName: "Doe"})
 	customers = append(customers, CustomerModel{FirstName: "Dani", LastName: "Setiawan"})
 	customers = append(customers, CustomerModel{FirstName: "Titis", LastName: "Rugaya"})
+	customers = append(customers, CustomerModel{FirstName: "Andre", LastName: "Lambert"})
 	return customers
 }
